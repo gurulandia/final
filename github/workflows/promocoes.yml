@@ -1,0 +1,35 @@
+name: Atualizar promoções
+
+# Agenda a execução diária às 11h no horário de Brasília (14h UTC)
+on:
+  schedule:
+    - cron: '0 14 * * *'
+  workflow_dispatch:  # Permite rodar manualmente pela interface do GitHub
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      # Baixa o código do repositório
+      - uses: actions/checkout@v3
+
+      # Instala o Python
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      # Instala as bibliotecas que o script precisa
+      - name: Instalar dependências Python
+        run: pip install requests beautifulsoup4
+
+      # Executa o script de promoções
+      - name: Executar script
+        run: python3 promocoes-scraper.py
+
+      # Comita o arquivo gerado (public/promocoes.js) se tiver mudanças
+      - name: Fazer commit das promoções
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: 'Atualiza promoções automaticamente'
+          add: 'public/promocoes.js'
