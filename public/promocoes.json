@@ -1,22 +1,62 @@
 [
     {
-        "nome": "10 Skol Beats GT Long Neck – R$ 49,90",
-        "preco": "R$ 49,90",
-        "texto_completo": "🔥 Promoção: 10 Skol Beats GT Long Neck – R$ 49,90 🔥"
+        "nome": "🔥 Promoção: 10 Skol Beats GT Long Neck – R$ 49,90 🔥",
+        "preco": "R$ 49,90",
+        "imagem": "https://client-assets.anota.ai/produtos/656de0b601cd1d001adf406c/-1755721024991blob"
     },
     {
-        "nome": "10 Skol Beats SENSES Long Neck – R$ 49,90",
-        "preco": "R$ 49,90",
-        "texto_completo": "🔥 Promoção: 10 Skol Beats SENSES Long Neck – R$ 49,90 🔥"
+        "nome": "🔥 Promoção: 10 Skol Beats SENSES Long Neck – R$ 49,90 🔥",
+        "preco": "R$ 49,90",
+        "imagem": "https://client-assets.anota.ai/produtos/656de0b601cd1d001adf406c/-1755721056656blob"
     },
     {
-        "nome": "10 Heineken Long Neck – R$ 59,90",
-        "preco": "R$ 59,90",
-        "texto_completo": "🔥 Promoção: 10 Heineken Long Neck – R$ 59,90 🔥"
+        "nome": "🔥 Promoção: 10 Heineken Long Neck – R$ 59,90 🔥",
+        "preco": "R$ 59,90",
+        "imagem": "https://client-assets.anota.ai/produtos/656de0b601cd1d001adf406c/-1755119438202blob"
     },
     {
-        "nome": "1 Fardo HEINEKEN Latão – R$ 65,88 (unidade por R$ 5,49)",
-        "preco": "R$ 65,88",
-        "texto_completo": "🔥 Promoção: 1 Fardo HEINEKEN Latão – R$ 65,88 (unidade por R$ 5,49) 🔥"
+        "nome": "COPÃO NA MÃO WHISK 2L",
+        "preco": "R$ 17,49",
+        "imagem": "https://client-assets.anota.ai/produtos/656de0b601cd1d001adf406c/-1754606116832blob"
+    },
+    {
+        "nome": "COPÃO NA MÃO MAÇA VERDE 2L",
+        "preco": "R$ 17,49",
+        "imagem": "https://client-assets.anota.ai/produtos/656de0b601cd1d001adf406c/-1754606190651blob"
+    },
+    {
+        "nome": "COPÃO NA MÃO MELANCIA 2L",
+        "preco": "R$ 17,49",
+        "imagem": "https://client-assets.anota.ai/produtos/656de0b601cd1d001adf406c/-1754606306672blob"
+    },
+    {
+        "nome": "COCA COLA 2L",
+        "preco": "R$ 9,49",
+        "imagem": "https://client-assets.anota.ai/produtos/656de0b601cd1d001adf406c/-1736961851090blob"
+    },
+    {
+        "nome": "LICOR BEM CASADO MORANGO 1L",
+        "preco": "R$ 54,90",
+        "imagem": "https://client-assets.anota.ai/produtos/656de0b601cd1d001adf406c/-1755037666340blob"
+    },
+    {
+        "nome": "MARULA 900 ML",
+        "preco": "R$ 26,90",
+        "imagem": "https://client-assets.anota.ai/produtos/656de0b601cd1d001adf406c/-1754606628703blob"
+    },
+    {
+        "nome": "WHISKY COM ENERGETICO MANSÃO MAROMBA",
+        "preco": "R$ 14,99",
+        "imagem": "https://client-assets.anota.ai/produtos/656de0b601cd1d001adf406c/-1709330568792blob"
+    },
+    {
+        "nome": "VODKA + CAFEÍNA MANSÃO MAROMBA",
+        "preco": "R$ 14,99",
+        "imagem": "https://client-assets.anota.ai/produtos/656de0b601cd1d001adf406c/-1709932218862blob"
+    },
+    {
+        "nome": "LICOR BEM CASADO DOCE DE LEITE",
+        "preco": "R$ 54,90",
+        "imagem": "https://client-assets.anota.ai/produtos/656de0b601cd1d001adf406c/-1755040897411blob"
     }
 ]

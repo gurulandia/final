@@ -266,8 +266,17 @@ function App() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {promocoes && promocoes.length > 0 ? (
                 promocoes.map((promocao, index) => (
-                  <Card key={index} className="group hover:shadow-lg transition-shadow duration-300 border-2 border-yellow-200 bg-white">
-                    <CardContent className="p-6 flex flex-col h-full">
+                  <Card key={index} className="group hover:shadow-lg transition-shadow duration-300 border-2 border-yellow-200 bg-white overflow-hidden flex flex-col">
+                    {promocao.imagem && (
+                      <div className="w-full h-48 overflow-hidden">
+                        <img 
+                          src={promocao.imagem} 
+                          alt={promocao.nome} 
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                    )}
+                    <CardContent className="p-6 flex flex-col flex-grow">
                       <Badge className="bg-red-500 text-white mb-4 w-fit">PROMOÇÃO</Badge>
                       <h4 className="text-lg font-bold text-gray-900 mb-2 flex-grow">{promocao.nome}</h4>
                       <p className="text-gray-600 mb-4">Oferta especial por tempo limitado!</p>
