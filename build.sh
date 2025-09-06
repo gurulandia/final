@@ -1,3 +1,4 @@
+echo "--- BUILD INICIADO DIRETAMENTE DO GITHUB ---"
 #!/bin/bash
 
 echo "🔧 Iniciando processo de build personalizado..."
