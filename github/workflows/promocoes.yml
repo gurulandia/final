@@ -19,9 +19,13 @@ jobs:
         with:
           python-version: '3.11'
 
+      # Instala o Google Chrome (necessário para o Selenium)
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@v1
+
       # Instala as bibliotecas que o script precisa
       - name: Instalar dependências Python
-        run: pip install requests beautifulsoup4
+        run: pip install requests beautifulsoup4 selenium webdriver-manager
 
       # Executa o script de promoções
       - name: Executar script

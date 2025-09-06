@@ -10,29 +10,47 @@ import json
 import re
 from datetime import datetime
 import os
+import time
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
 
 def buscar_promocoes():
     """Busca as promoções da seção PROMOÇÃO DA SEMANA do site Anota.ai"""
     
     url = "https://pedido.anota.ai/loja/nosso-drink-2249630?f=ms"
     
+    # Configurar o Selenium
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    
+    driver = None  # Inicializar driver como None
     try:
+        # Usar webdriver-manager para gerenciar o driver
+        service = Service(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=service, options=chrome_options)
+        
         # Fazer requisição para o site
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        }
+        driver.get(url)
         
-        response = requests.get(url, headers=headers, timeout=10)
-        response.raise_for_status()
+        # Esperar o JavaScript carregar - 10 segundos é um começo
+        print("Aguardando o carregamento da página (10 segundos)...")
+        time.sleep(10)
         
+        # Pegar o HTML renderizado
+        html_content = driver.page_source
+
         # Parse do HTML
-        soup = BeautifulSoup(response.content, 'html.parser')
+        soup = BeautifulSoup(html_content, 'html.parser')
         
         promocoes = []
         
         # Buscar seção de promoções
         # Procurar por elementos que contenham "Promoção:" no texto
-        promocao_elements = soup.find_all(text=re.compile(r'🔥.*Promoção:.*🔥'))
+        promocao_elements = soup.find_all(string=re.compile(r'🔥.*Promoção:.*🔥'))
         
         for element in promocao_elements[:6]:  # Limitar a 6 promoções
             # Extrair informações da promoção
@@ -72,6 +90,9 @@ def buscar_promocoes():
     except Exception as e:
         print(f"Erro ao buscar promoções: {e}")
         return []
+    finally:
+        if driver:
+            driver.quit()
 
 def gerar_javascript_promocoes(promocoes):
     """Gera código JavaScript para atualizar as promoções no site"""
@@ -153,14 +174,13 @@ def main():
         
         # Salvar promoções
         if salvar_promocoes(promocoes):
-            print("✅ Promoções atualizadas com sucesso!")
+            print("Promocoes atualizadas com sucesso!")
         else:
-            print("❌ Erro ao salvar promoções")
+            print("Erro ao salvar promocoes")
     else:
-        print("⚠️ Nenhuma promoção encontrada")
+        print("Nenhuma promocao encontrada")
     
     print(f"[{datetime.now()}] Processo concluído")
 
 if __name__ == "__main__":
     main()
-
