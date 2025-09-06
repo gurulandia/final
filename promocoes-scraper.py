@@ -94,66 +94,28 @@ def buscar_promocoes():
         if driver:
             driver.quit()
 
-def gerar_javascript_promocoes(promocoes):
-    """Gera código JavaScript para atualizar as promoções no site"""
-    
+def gerar_json_promocoes(promocoes):
+    """Gera uma string JSON com as promoções."""
     if not promocoes:
-        return """
-// Nenhuma promoção encontrada
-console.log('Nenhuma promoção encontrada');
-"""
+        # Retorna um array JSON vazio se não houver promoções
+        return json.dumps([], indent=4)
     
-    js_code = """
-// Atualizar promoções na página
-document.addEventListener('DOMContentLoaded', function() {
-    const promocoesContainer = document.getElementById('promocoes-container');
-    if (!promocoesContainer) return;
-    
-    const promocoes = """ + json.dumps(promocoes, ensure_ascii=False, indent=4) + """;
-    
-    // Limpar container
-    promocoesContainer.innerHTML = '';
-    
-    // Adicionar cada promoção
-    promocoes.forEach(promocao => {
-        const card = document.createElement('div');
-        card.className = 'group hover:shadow-lg transition-shadow duration-300 border-2 border-yellow-200 bg-white rounded-lg p-6';
-        
-        card.innerHTML = `
-            <div class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded mb-4 inline-block">PROMOÇÃO</div>
-            <h4 class="text-lg font-bold text-gray-900 mb-2">${promocao.nome}</h4>
-            <p class="text-gray-600 mb-4">Oferta especial por tempo limitado!</p>
-            <div class="flex items-center justify-between">
-                <span class="text-2xl font-bold text-red-600">${promocao.preco}</span>
-                <button onclick="window.open('https://pedido.anota.ai/', '_blank')" 
-                        class="bg-yellow-500 hover:bg-yellow-600 text-black px-4 py-2 rounded font-semibold">
-                    Pedir Agora
-                </button>
-            </div>
-        `;
-        
-        promocoesContainer.appendChild(card);
-    });
-    
-    console.log('Promoções atualizadas:', promocoes.length);
-});
-"""
-    
-    return js_code
+    # Converte a lista de promoções para JSON
+    return json.dumps(promocoes, ensure_ascii=False, indent=4)
 
 def salvar_promocoes(promocoes):
-    """Salva as promoções em arquivo JavaScript"""
+    """Salva as promoções em arquivo JSON."""
     
-    js_code = gerar_javascript_promocoes(promocoes)
+    json_content = gerar_json_promocoes(promocoes)
     
-    # Salvar no diretório public do site
-    js_file_path = os.path.join(os.path.dirname(__file__), 'public', 'promocoes.js')
+    # Salvar no diretório public do site com o nome promocoes.json
+    json_file_path = os.path.join(os.path.dirname(__file__), 'public', 'promocoes.json')
     
     try:
-        with open(js_file_path, 'w', encoding='utf-8') as f:
-            f.write(js_code)
+        with open(json_file_path, 'w', encoding='utf-8') as f:
+            f.write(json_content)
         
-        print(f"Promoções salvas em: {js_file_path}")
+        print(f"Promoções salvas em: {json_file_path}")
         return True
         
     except Exception as e:

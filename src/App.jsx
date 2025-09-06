@@ -21,14 +21,16 @@ import './App.css'
 
 // Importar imagens
 import heroImage from './assets/cDTF0HRVaIFk.jpg'
-import beerBottleImage from './assets/aUdQapnu4n1d.png'
-import beerGlassImage from './assets/sBtz6HQJOh5D.jpg'
 import storeImage from './assets/fachada-megabeer.jpg'
 import logoImage from './assets/Logo1APNG.png'
+
+// Importar dados das promoções
+import promocoesData from '/public/promocoes.json'
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [promocoes, setPromocoes] = useState([])
 
   // Detectar scroll para header
   useEffect(() => {
@@ -37,6 +39,13 @@ function App() {
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Carregar promoções do JSON
+  useEffect(() => {
+    if (Array.isArray(promocoesData)) {
+      setPromocoes(promocoesData)
+    }
   }, [])
 
   // WhatsApp link
@@ -254,18 +263,35 @@ function App() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="promocoes-container">
-              {/* As promoções serão carregadas aqui dinamicamente */}
-              <Card className="group hover:shadow-lg transition-shadow duration-300 border-2 border-yellow-200">
-                <CardContent className="p-6">
-                  <Badge className="bg-red-500 text-white mb-4">PROMOÇÃO</Badge>
-                  <h4 className="text-lg font-bold text-gray-900 mb-2">Carregando promoções...</h4>
-                  <p className="text-gray-600 mb-4">Aguarde enquanto buscamos as melhores ofertas para você!</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-red-600">Em breve</span>
-                  </div>
-                </CardContent>
-              </Card>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {promocoes && promocoes.length > 0 ? (
+                promocoes.map((promocao, index) => (
+                  <Card key={index} className="group hover:shadow-lg transition-shadow duration-300 border-2 border-yellow-200 bg-white">
+                    <CardContent className="p-6 flex flex-col h-full">
+                      <Badge className="bg-red-500 text-white mb-4 w-fit">PROMOÇÃO</Badge>
+                      <h4 className="text-lg font-bold text-gray-900 mb-2 flex-grow">{promocao.nome}</h4>
+                      <p className="text-gray-600 mb-4">Oferta especial por tempo limitado!</p>
+                      <div className="flex items-center justify-between mt-auto">
+                        <span className="text-2xl font-bold text-red-600">{promocao.preco}</span>
+                        <Button 
+                          onClick={() => window.open('https://pedido.anota.ai/', '_blank')}
+                          className="bg-yellow-500 hover:bg-yellow-600 text-black px-4 py-2 rounded font-semibold">
+                          Pedir Agora
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))
+              ) : (
+                <div className="col-span-full text-center">
+                  <Card className="inline-block">
+                    <CardContent className="p-6">
+                      <h4 className="text-lg font-bold text-gray-900 mb-2">Nenhuma promoção no momento</h4>
+                      <p className="text-gray-600">Volte mais tarde para conferir as melhores ofertas!</p>
+                    </CardContent>
+                  </Card>
+                </div>
+              )}
             </div>
 
             <div className="text-center mt-12">
@@ -626,4 +652,3 @@ function App() {
 }
 
 export default App
-
