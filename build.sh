@@ -1,19 +1,21 @@
 #!/bin/bash
 
-# Script de build personalizado para forçar uso do npm na Vercel
-echo "🔧 Forçando uso do npm..."
+echo "🔧 Iniciando processo de build personalizado..."
 
-# Remover qualquer arquivo do pnpm que possa existir
-rm -f pnpm-lock.yaml
-rm -rf .pnpm-store
-rm -rf node_modules/.pnpm
+# 1. Instalar dependências do Python
+echo "🐍 Instalando dependências do Python..."
+pip install -r requirements.txt
 
-# Garantir que o npm está sendo usado
-echo "📦 Instalando dependências com npm..."
+# 2. Executar o scraper para obter as promoções mais recentes
+echo "🔍 Executando scraper de promoções..."
+python promocoes-scraper.py
+
+# 3. Instalar dependências do Node.js
+echo "📦 Instalando dependências do Node.js com npm..."
 npm install --legacy-peer-deps
 
-echo "🏗️ Fazendo build..."
+# 4. Fazer o build do frontend
+echo "🏗️ Fazendo build do frontend com Vite..."
 npm run build
 
 echo "✅ Build concluído com sucesso!"
-
