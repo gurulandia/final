@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://final-lilac-one.vercel.app/sitemap.xml
